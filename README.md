@@ -34,16 +34,19 @@
 
 ### DCOMP Cluster Setup
 
-Step 1: [xdc] ansible-playbook -i hosts kube-dependencies.yml
-Step 2: [master] ./master.bash
-Step 3: [master] restart_coredns.bash
-	kubectl -nkube-system edit configmap coredns *comment loop*
+- Step 1: [xdc] ansible-playbook -i hosts kube-dependencies.yml
+- Step 2: [master] ./master.bash
+- Step 3: [master] restart_coredns.bash
+
+```
+	kubectl -nkube-system edit configmap coredns #comment loop
 	./restart_coredns.bash
-Step 4: [master] ./sourceit.bash
-Step 5: [master] kubeadm token create --print-join-command
-	    [xdc] copy this token to workers.bash	
-Step 6: [xdc] ansible-playbook -i hosts workers.yaml
-Step 7: [workers] run workers.bash on all the nodes
+```
+- Step 4: [master] ./sourceit.bash
+- Step 5: [master] kubeadm token create --print-join-command
+	     [xdc] copy this token to workers.bash	
+- Step 6: [xdc] ansible-playbook -i hosts workers.yaml
+- Step 7: [workers] run workers.bash on all the nodes
 
 
 
