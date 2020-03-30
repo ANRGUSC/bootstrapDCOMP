@@ -1,0 +1,79 @@
+- hosts: all
+  become: yes
+  tasks:
+   - name: install Docker
+     apt:
+       name: docker.io
+       state: present
+       update_cache: true
+- hosts: all
+  become: yes
+  tasks:
+   - name: copy local scripts
+     copy: src={{item.src}} dest={{item.dest}}
+     with_items:
+     - {src: 'kube-install.bash' ,dest: '/home/caravansary83/kube-install.bash'}
+
+   - name: Fix permissions
+     become: yes
+     file:
+       path: /home/caravansary83/kube-install.bash 
+       mode: 0777 
+
+   - name: Install nano
+     shell: apt-get install nano
+
+
+   - name: Install
+     become: yes
+     shell: /home/caravansary83/kube-install.bash
+
+- hosts: master
+  become: yes
+  tasks:
+    - name: copy master scripts
+      copy: src={{item.src}} dest={{item.dest}}
+      with_items:
+      - {src: 'master.bash' ,dest: '/home/caravansary83/master.bash'}
+      - {src: 'restart_coredns.bash' ,dest: '/home/caravansary83/restart_coredns.bash'}
+      - {src: 'sourceit.bash' ,dest: '/home/caravansary83/sourceit.bash'}
+
+    - name: Fix permissions
+      become: yes
+      file:
+        path: /home/caravansary83/master.bash
+        mode: 0777
+
+    - name: Fix permissions
+      become: yes
+      file:
+        path: /home/caravansary83/restart_coredns.bash
+        mode: 0777
+
+    - name: Fix permissions
+      become: yes
+      file:
+        path: /home/caravansary83/sourceit.bash
+        mode: 0777
+
+
+- hosts: master
+  become: yes
+  tasks:
+    - name: copy route scripts
+      copy: src={{item.src}} dest={{item.dest}}
+      with_items:
+      - {src: 'sourceit_jupiter.bash' ,dest: 'sourceit_jupiter.bash'}
+    - name: Fix permissions
+      become: yes
+      file:
+        path: /home/caravansary83/sourceit_jupiter.bash
+        mode: 0777 
+
+
+
+
+
+
+
+  

@@ -1,0 +1,12 @@
+- hosts: workers
+  become: yes
+  tasks:
+    - name: copy workers scripts
+      copy: src={{item.src}} dest={{item.dest}}
+      with_items:
+      - {src: 'workers.bash' ,dest: '/home/caravansary83/workers.bash'}
+    - name: Fix permissions
+      become: yes
+      file:
+        path: /home/caravansary83/workers.bash
+        mode: 0777

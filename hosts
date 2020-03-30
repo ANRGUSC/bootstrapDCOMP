@@ -1,0 +1,10 @@
+[masters]
+master ansible_host=n0 ansible_connection=ssh ansible_user=caravansary83 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[workers]
+node1 ansible_host=n1 ansible_connection=ssh ansible_user=caravansary83 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+node2 ansible_host=n2 ansible_connection=ssh ansible_user=caravansary83 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+node3 ansible_host=n3 ansible_connection=ssh ansible_user=caravansary83 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+node4 ansible_host=n4 ansible_connection=ssh ansible_user=caravansary83 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+node5 ansible_host=n5 ansible_connection=ssh ansible_user=caravansary83 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
